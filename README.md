@@ -101,8 +101,52 @@ http://<NodeIP>:<NodePort>
 6. MongoDB authenticates the request and returns the response.
 
 ## Project Structure
+The directory layout for this project looks like this:
+```bash
+kubernetes-mongo-demo
+│
+├── mongo-configmap.yaml
+├── mongo-secret.yaml
+├── mongo-deployment.yaml
+├── mongo-service.yaml
+│
+├── mongo-express-deployment.yaml
+├── mongo-express-service.yaml
+│
+└── README.md
+```
 
 ## Deployment Steps
+### 1. Create the Secret
+Store MongoDB credentials securely. Here, The username and password are saved as base64 encoded, rather than in plain text.
+```bash
+kubectl apply -f mongo-secret.yaml
+```
+### 2. Create the ConfigMap
+Provide MongoDB connection configuration.
+```bash
+kubectl apply -f mongo-configmap.yaml
+```
+### 3. Deploy MongoDB
+Start the MongoDB container inside the cluster.
+```bash
+kubectl apply -f mongo-deployment.yaml
+```
+### 4. Create the MongoDB Internal Service
+Allow other Pods in the same cluster to connect to the database.
+```bash
+kubectl apply -f mongo-service.yaml
+```
+### 5. Deploy Mongo Express
+Deploy the web interface and configure it to connect to MongoDB.
+```bash
+kubectl apply -f mongo-express-deployment.yaml
+```
+### 6. Create the Mongo Express External Service
+Allow outside connection to access the web interface of Mongo Express
+```bash
+kubectl apply -f mongo-express-service.yaml
+```
 
 ## Verifying the Deployment
 
