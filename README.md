@@ -148,7 +148,60 @@ Allow outside connection to access the web interface of Mongo Express
 kubectl apply -f mongo-express-service.yaml
 ```
 
-## Verifying the Deployment
+## How to Run the Project
+This project can be run locally using <b>Minikube</b>, which provides a local kubernetes cluster for development and testing.
+### Prerequisites
+Make sure the following tools are installed:
+- Docker
+- MiniKube
+- kubectl
+
+Verify installation:
+```bash
+docker --version
+minikube version
+kubectl version --client
+```
+### 1. Start Minikube
+Start a local Kubernetes cluster:
+```bash
+minikube start
+```
+Check cluster status
+```bash
+kubectl get nodes
+```
+You should see a running node.
+
+### 2. Deploy Kubernetes Resources
+Check the Deployment Steps in the section above this
+
+### 3. Verify Deployment
+Check that all the pods are running:
+```bash
+kubectl get pods
+```
+Similarly, check for the services:
+```bash
+kubectl get services
+```
+
+### 4. Access the Application
+Since this project runs on Minikube, the easiest way to access the application is:
+```bash
+minikube service mongo-express-service
+```
+This command will automatically open the <b>Mongo Express Web Interface</b> in your browser.
+
+### 5. Stop the Cluster
+When you're finished, you can stop Minikube:
+```bash
+minikube stop
+```
+To delete the cluster completely:
+```bash
+minikube delete
+```
 
 ## Key Kubernetes Concepts Demonstrated
 This project demonstrates several fundamental Kubernetes concepts:
